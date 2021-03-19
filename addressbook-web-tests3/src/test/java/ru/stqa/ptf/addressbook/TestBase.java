@@ -60,7 +60,7 @@ public class TestBase {
     }
 
     protected void returnToHomePage() {
-      wd.findElement(By.linkText("home page")).click();
+      wd.findElement(By.linkText("home")).click();
     }
 
     protected void submitCreation() {
@@ -116,5 +116,21 @@ public class TestBase {
 
     protected void selectGroup() {
       wd.findElement(By.name("selected[]")).click();
+    }
+
+    protected void confirmContactDeletion() {
+      wd.switchTo().alert().accept();
+    }
+
+    protected void deleteSelectedContact() {
+      wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    }
+
+    protected void selectContact() {
+      wd.findElement(By.name("selected[]")).click();
+    }
+
+    protected void goToHomePage() {
+      wd.findElement(By.linkText("home")).click();
     }
 }

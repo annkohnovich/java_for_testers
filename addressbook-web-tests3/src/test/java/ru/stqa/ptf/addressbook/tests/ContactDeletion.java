@@ -16,7 +16,7 @@ public class ContactDeletion extends TestBase {
               "+375293650345",
               "annkohnovich@gmail.com"));
     }
-    app.getContactHelper().selectContact();
+    app.getContactHelper().selectContact(before-1);
     app.getContactHelper().deleteSelectedContact();
     app.getContactHelper().confirmContactDeletion();
     app.getNavigationHelper().goToHomePage();

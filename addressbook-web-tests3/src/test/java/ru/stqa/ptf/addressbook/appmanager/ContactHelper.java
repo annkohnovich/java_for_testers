@@ -49,7 +49,6 @@ public class ContactHelper extends HelperBase {
     }
 
 
-
     public void createAContact(ContactData contact) {
         initContactCreation();
         fillContactForm(contact);
@@ -65,4 +64,7 @@ public class ContactHelper extends HelperBase {
         return isElementPresent (By.name("selected[]"));
     }
 
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }

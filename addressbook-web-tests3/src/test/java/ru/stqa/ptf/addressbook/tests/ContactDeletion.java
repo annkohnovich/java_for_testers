@@ -7,25 +7,29 @@ import ru.stqa.ptf.addressbook.model.ContactData;
 import java.util.List;
 
 public class ContactDeletion extends TestBase {
-
-  @Test
-  public void testContactDeletion() throws Exception {
-    app.goTo().goToHomePage();
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createAContact(new ContactData("Hanna",
+  @BeforeMethod
+  public void ensurePreconditions () {
+    app.goTo().homePage();
+    if (app.contact().list().size()==0) {
+      app.contact().create(new ContactData(
+              "Hanna",
               "Kakhnovich",
               "+375293650345",
               "annkohnovich@gmail.com"));
     }
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().deleteSelectedContact();
-    app.getContactHelper().confirmContactDeletion();
-    app.goTo().goToHomePage();
-    List <ContactData> after = app.getContactHelper().getContactList();
+  }
+
+  @Test
+  public void testContactDeletion() throws Exception {
+    List<ContactData> before = app.contact().list();
+    int index = before.size() -1;
+    app.contact().delete(index);
+    List <ContactData> after = app.contact().list();
     Assert.assertEquals (after.size(), before.size() - 1);
 
-    before.remove(before.size() - 1);
+    before.remove(index);
     Assert.assertEquals(before, after);
   }
+
+
 }

@@ -52,14 +52,6 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-
-    public void createAContact(ContactData contact) {
-        initContactCreation();
-        fillContactForm(contact);
-        submitContactCreation();
-        goToHomePage();
-    }
-
     private void goToHomePage() {
         click(By.linkText("home page"));
     }
@@ -72,7 +64,7 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> rows = wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[@name=\"entry\"]"));
 
@@ -85,5 +77,24 @@ public class ContactHelper extends HelperBase {
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    public void create(ContactData contact) {
+        initContactCreation();
+        fillContactForm(contact);
+        submitContactCreation();
+        goToHomePage();
+    }
+    public void modify(int index, ContactData contact) {
+        initContactModification(index);
+        fillContactForm(contact);
+        submitContactModification();
+        goToHomePage();
+    }
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContact();
+        confirmContactDeletion();
+        goToHomePage();
     }
 }

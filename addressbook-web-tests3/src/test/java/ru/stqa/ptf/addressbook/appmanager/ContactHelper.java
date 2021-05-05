@@ -53,7 +53,7 @@ public class ContactHelper extends HelperBase {
     }
 
     private void goToHomePage() {
-        click(By.linkText("home page"));
+        click(By.linkText("home"));
     }
 
     public boolean isThereAContact() {
@@ -73,7 +73,7 @@ public class ContactHelper extends HelperBase {
             String first_name = cells.get(2).getText();
             String last_name = cells.get(1).getText();
             int id = Integer.parseInt(r.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(id, first_name, last_name, null, null);
+            ContactData contact = new ContactData().withId(id).withFirstName(first_name).withLastName(last_name);
             contacts.add(contact);
         }
         return contacts;

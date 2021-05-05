@@ -1,27 +1,11 @@
 package ru.stqa.ptf.addressbook.model;
 
 public class ContactData {
-    private int id;
-    private final String firstName;
-    private final String lastName;
-    private final String mobilePhone;
-    private final String email;
-
-    public ContactData(String first_name, String last_name, String mobile_phone, String email) {
-        this.id = Integer.MAX_VALUE;
-        this.firstName = first_name;
-        this.lastName = last_name;
-        this.mobilePhone = mobile_phone;
-        this.email = email;
-    }
-
-    public ContactData(int id, String first_name, String last_name, String mobile_phone, String email) {
-        this.id = id;
-        this.firstName = first_name;
-        this.lastName = last_name;
-        this.mobilePhone = mobile_phone;
-        this.email = email;
-    }
+    private int id = Integer.MAX_VALUE;
+    private String firstName;
+    private String lastName;
+    private String mobilePhone;
+    private String email;
 
     public int getId() {
         return id;
@@ -43,8 +27,30 @@ public class ContactData {
         return email;
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
+
         this.id = id;
+        return this;
+    }
+
+    public ContactData withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
     }
 
     @Override

@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.ptf.addressbook.model.ContactData;
-import ru.stqa.ptf.addressbook.model.GroupData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -38,15 +38,15 @@ public class ContactHelper extends HelperBase {
     }
 
     public void deleteSelectedContact() {
-      click (By.xpath("//input[@value='Delete']"));
+        click (By.xpath("//input[@value='Delete']"));
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    public void selectContactById (int id) {
+        wd.findElement (By.cssSelector("input[value='" + id + "']")).click();
     }
 
-    public void initContactModification(int index) {
-        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+    private void initContactModificationById(int id) {
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
     }
 
     public void submitContactModification() {
@@ -65,8 +65,8 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    public Set <ContactData> all() {
+        Set <ContactData> contacts = new HashSet<ContactData>();
         List<WebElement> rows = wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[@name=\"entry\"]"));
 
         for (WebElement r : rows) {
@@ -86,14 +86,15 @@ public class ContactHelper extends HelperBase {
         submitContactCreation();
         goToHomePage();
     }
-    public void modify(int index, ContactData contact) {
-        initContactModification(index);
+    public void modify(ContactData contact) {
+        initContactModificationById(contact.getId());
         fillContactForm(contact);
         submitContactModification();
         goToHomePage();
     }
-    public void delete(int index) {
-        selectContact(index);
+
+    public void delete(ContactData deletedContact) {
+        selectContactById (deletedContact.getId());
         deleteSelectedContact();
         confirmContactDeletion();
         goToHomePage();

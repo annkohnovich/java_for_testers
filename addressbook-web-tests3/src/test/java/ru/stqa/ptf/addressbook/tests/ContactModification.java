@@ -8,8 +8,6 @@ import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;
 
-import java.util.Set;
-
 public class ContactModification extends TestBase {
     @BeforeMethod
     public void ensurePreconditions () {

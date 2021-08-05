@@ -12,6 +12,8 @@ import static org.testng.Assert.*;
 
 public class ContactCreation extends TestBase {
 
+  @DataProvider
+
   @Test
   public void testContactCreation() {
     app.goTo().homePage();

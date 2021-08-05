@@ -2,28 +2,28 @@
   {
     "firstName": "name 0",
     "lastName": "Surname 0",
-    "mobilePhone": "029-365-25-4 0",
-    "homePhone": "556035 0",
-    "workPhone": "5560666 0",
-    "address": "yl. Lenina 0",
-    "email": "ann 0 @gmail.com"
+    "mobilePhone": "029-365-25-40",
+    "homePhone": "5560350",
+    "workPhone": "55606660",
+    "address": "yl Lenina 0",
+    "email": "ann0@gmail.com"
   },
   {
     "firstName": "name 1",
     "lastName": "Surname 1",
-    "mobilePhone": "029-365-25-4 1",
-    "homePhone": "556035 1",
-    "workPhone": "5560666 1",
-    "address": "yl. Lenina 1",
-    "email": "ann 1 @gmail.com"
+    "mobilePhone": "029-365-25-41",
+    "homePhone": "5560351",
+    "workPhone": "55606661",
+    "address": "yl Lenina 1",
+    "email": "ann1@gmail.com"
   },
   {
     "firstName": "name 2",
     "lastName": "Surname 2",
-    "mobilePhone": "029-365-25-4 2",
-    "homePhone": "556035 2",
-    "workPhone": "5560666 2",
-    "address": "yl. Lenina 2",
-    "email": "ann 2 @gmail.com"
+    "mobilePhone": "029-365-25-42",
+    "homePhone": "5560352",
+    "workPhone": "55606662",
+    "address": "yl Lenina 2",
+    "email": "ann2@gmail.com"
   }
 ]

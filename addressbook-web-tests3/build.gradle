@@ -6,8 +6,26 @@ repositories {
 
 dependencies {
     implementation group: 'org.testng', name: 'testng', version: '7.4.0'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-1'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-4'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
     implementation 'com.beust:jcommander:1.81'
     implementation 'com.google.code.gson:gson:2.8.7'
+}
+
+task testGroups (type: Test) {
+    useTestNG{
+        suites 'src/test/resources/testng-groups.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+}
+
+task testContacts (type: Test) {
+    useTestNG{
+        suites 'src/test/resources/testng-contacts.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
 }

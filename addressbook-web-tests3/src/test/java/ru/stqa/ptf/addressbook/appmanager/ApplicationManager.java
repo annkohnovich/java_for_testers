@@ -30,6 +30,7 @@ public class ApplicationManager {
     }
 
     public void init() throws IOException {
+        dbHelper = new DbHelper();
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
         if (browser.equals(BrowserType.FIREFOX)) {
@@ -48,7 +49,7 @@ public class ApplicationManager {
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
-        dbHelper = new DbHelper();
+
     }
 
     public void stop() {

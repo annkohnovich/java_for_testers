@@ -42,7 +42,7 @@ public class ApplicationManager {
         }
 
 
-        wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         wd.get(properties.getProperty("web.baseUrl"));
         groupHelper = new GroupHelper(wd);
         contactHelper = new ContactHelper(wd);

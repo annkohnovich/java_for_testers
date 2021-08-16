@@ -6,6 +6,8 @@ import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.stqa.ptf.addressbook.model.ContactData;
+import ru.stqa.ptf.addressbook.model.GroupData;
+import ru.stqa.ptf.addressbook.model.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,6 +15,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ru.stqa.ptf.addressbook.tests.TestBase.app;
 
 public class ContactDataGenerator {
     @Parameter (names = "-c", description = "Contact Count")

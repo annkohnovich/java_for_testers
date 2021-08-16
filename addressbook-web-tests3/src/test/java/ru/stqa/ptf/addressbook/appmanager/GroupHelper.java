@@ -3,9 +3,12 @@ package ru.stqa.ptf.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.stqa.ptf.addressbook.model.GroupData;
 import ru.stqa.ptf.addressbook.model.Groups;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -74,10 +77,6 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-    public boolean isThereAGroup() {
-        return isElementPresent (By.name("selected[]"));
-    }
-
     public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
@@ -98,5 +97,8 @@ public class GroupHelper extends HelperBase {
         return new Groups(groupCache);
     }
 
+    public boolean isThereAGroup() {
+        return isElementPresent (By.name("selected[]"));
+    }
 
 }

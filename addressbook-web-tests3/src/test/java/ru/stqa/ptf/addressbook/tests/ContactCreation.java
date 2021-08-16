@@ -5,6 +5,8 @@ import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.*;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;
+import ru.stqa.ptf.addressbook.model.GroupData;
+import ru.stqa.ptf.addressbook.model.Groups;
 
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.io.*;
@@ -35,6 +37,12 @@ public class ContactCreation extends TestBase {
 
   @Test (dataProvider = "validContacts")
   public void testContactCreation(ContactData contact) {
+    if (app.db().groups().size() ==0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("test2"));
+    }
+    Groups groups = app.db().groups();
+    contact.inGroup(groups.iterator().next());
     Contacts before = app.db().contacts();
     //File photo = new File("src/test/resources/image.png");
     app.contact().create(contact);

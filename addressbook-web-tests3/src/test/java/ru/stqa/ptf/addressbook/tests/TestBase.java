@@ -1,7 +1,5 @@
 package ru.stqa.ptf.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +23,7 @@ import static org.hamcrest.MatcherAssert.*;
 public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
 
-    protected static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+    public static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
     public void verifyGroupListInUI() {
         if (Boolean.getBoolean("verifyUI")) {

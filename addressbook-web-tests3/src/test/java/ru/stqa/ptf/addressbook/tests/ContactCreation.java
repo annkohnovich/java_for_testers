@@ -41,8 +41,8 @@ public class ContactCreation extends TestBase {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test2"));
     }
-    Groups groups = app.db().groups();
-    contact.inGroup(groups.iterator().next());
+//    Groups groups = app.db().groups();
+//    contact.inGroup(groups.iterator().next());
     Contacts before = app.db().contacts();
     //File photo = new File("src/test/resources/image.png");
     app.contact().create(contact);

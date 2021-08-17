@@ -24,7 +24,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
-    public void fillContactForm(ContactData contactData, Boolean creation) {
+    public void fillContactForm(ContactData contactData) {
       type(By.name("firstname"), contactData.getFirstName());
       type(By.name("lastname"), contactData.getLastName());
       type(By.name("mobile"), contactData.getMobilePhone());
@@ -33,15 +33,6 @@ public class ContactHelper extends HelperBase {
       type(By.name("email"),contactData.getEmail());
       type(By.name("address"),contactData.getAddress());
       attach(By.name("photo"),contactData.getPhoto());
-      if (creation) {
-          if (contactData.getGroups().size() > 0) {
-              new Select(wd.findElement(By.name("new_group")))
-                      .selectByVisibleText(contactData.getGroups().iterator().next().getName());
-          }
-          else {
-              Assert.assertFalse(isElementPresent(By.name("new_group")));
-          }
-      }
 
     }
 
@@ -70,10 +61,6 @@ public class ContactHelper extends HelperBase {
 
     private void goToHomePage() {
         click(By.linkText("home"));
-    }
-
-    public boolean isThereAContact() {
-        return isElementPresent (By.name("selected[]"));
     }
 
     public int count() {
@@ -108,14 +95,14 @@ public class ContactHelper extends HelperBase {
 
     public void create(ContactData contact) {
         initContactCreation();
-        fillContactForm(contact, true);
+        fillContactForm(contact);
         submitContactCreation();
         contactCache = null;
         goToHomePage();
     }
     public void modify(ContactData contact) {
         initContactModificationById(contact.getId());
-        fillContactForm(contact, false);
+        fillContactForm(contact);
         submitContactModification();
         contactCache = null;
         goToHomePage();
@@ -153,15 +140,27 @@ public class ContactHelper extends HelperBase {
                 .withEmail(email).withEmail2(email2).withEmail3(email3);
     }
 
-    public void selectGroupById(int id) {
+    public void selectGroupByIdToAdd(int id) {
         Select element = new Select(wd.findElement(By.name("to_group")));
         element.selectByValue(String.valueOf(id));
     }
 
     public void submitAddingGroup() {
-        wd.findElement(By.cssSelector("input[type = 'submit']")).click();
+        wd.findElement(By.cssSelector("input[name = 'add']")).click();
     }
 
+    public void selectGroupById(int id) {
+        Select element = new Select(wd.findElement(By.name("group")));
+        element.selectByValue(String.valueOf(id));
+    }
+
+    public void submitDeletingGroup() {
+        wd.findElement(By.cssSelector("input[name = 'remove']")).click();
+    }
+
+    public boolean isThereAContact(int id) {
+        return isElementPresent (By.cssSelector("input[id = \"" + id + "\"]"));
+    }
 }
 
 

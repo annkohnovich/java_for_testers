@@ -8,22 +8,45 @@ import ru.stqa.ptf.addressbook.model.Groups;
 
 import java.util.List;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.*;
 
 public class ContactDeletedFromGroupTest extends TestBase{
 
     @Test
-    
-    public void testContactDeletedFromGroup(){
-
+    public void testContactDeletedFromGroup() {
         List<ContactData> allContacts = app.db().contactsList();
         ContactData contact = app.db().contacts().iterator().next();
-        int contactId = contact.getId();
         int index = allContacts.indexOf(contact);
-        GroupData groupToDelete = null;
+        GroupData groupToDelete = getGroupToDelete(contact);
+        int groupId = groupToDelete.getId();
 
-        if (contact.getGroups().isEmpty()){
+        ContactData updatedContactBefore = updateContact(index);
+        Groups userGroupsBefore = updatedContactBefore.getGroups();
+
+        app.goTo().homePage();
+        app.contact().selectGroupById(groupId);
+        app.contact().selectContactById(contact.getId());
+        app.contact().submitDeletingGroup();
+        app.goTo().homePageForGroup(groupToDelete.getName());
+
+        assertFalse(app.contact().isThereAContact(contact.getId()));
+
+        ContactData updatedContactAfter = updateContact(index);
+        Groups userGroupsAfter = updatedContactAfter.getGroups();
+        assertEquals (userGroupsAfter.size(), userGroupsBefore.size() - 1);
+        assertThat(userGroupsAfter, equalTo(userGroupsBefore.without(groupToDelete)));
+
+    }
+
+    private ContactData updateContact (int index){
+        List<ContactData> refreshedContacts = app.db().contactsList();
+        return refreshedContacts.get(index);
+    }
+
+    private GroupData getGroupToDelete(ContactData contact) {
+        if (contact.getGroups().isEmpty()) {
             GroupData groupToAdd;
             if (app.db().groups().isEmpty()) {
                 app.goTo().groupPage();
@@ -33,25 +56,12 @@ public class ContactDeletedFromGroupTest extends TestBase{
                 groupToAdd = app.db().groups().iterator().next();
             }
             app.goTo().homePage();
-            app.contact().selectContactById(contactId);
+            app.contact().selectContactById(contact.getId());
             app.contact().selectGroupByIdToAdd(groupToAdd.getId());
             app.contact().submitAddingGroup();
-            groupToDelete = groupToAdd;
-
+            return groupToAdd;
         } else {
-            groupToDelete = contact.getGroups().iterator().next();
+            return contact.getGroups().iterator().next();
         }
-
-        int groupId = groupToDelete.getId();
-        Groups userGroupsBefore = contact.getGroups();
-        app.goTo().homePage();
-        app.contact().selectGroupById(groupId);
-        app.contact().selectContactById(contactId);
-        app.contact().submitDeletingGroup();
-        app.goTo().homePageForGroup(groupToDelete.getName());
-
-        assertFalse(app.contact().isThereAContact(contactId));
-
-
     }
 }

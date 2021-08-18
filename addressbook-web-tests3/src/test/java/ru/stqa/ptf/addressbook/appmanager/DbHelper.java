@@ -64,16 +64,11 @@ public class DbHelper {
     public GroupData groupWithMaxId(){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<GroupData> list = session.createQuery("from GroupData").list();
-        int maxId = 0;
-        GroupData result = null;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId() > maxId) {
-                maxId = list.get(i).getId();
-                result = list.get(i);
-            }
-        }
-
+        GroupData result = (GroupData) session.createQuery(
+                "select g " +
+                        "from GroupData g " +
+                        "where g.id = ( select max(gg.id) from GroupData gg ) ")
+                .uniqueResult();
         session.getTransaction().commit();
         session.close();
         return result;

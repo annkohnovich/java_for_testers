@@ -10,6 +10,7 @@ dependencies {
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
     compile 'org.apache.httpcomponents:httpclient:4.5.13'
     implementation 'commons-net:commons-net:20030805.205232'
+    implementation 'hu.blackbelt.bundles.subethasmtp:org.subethamail.subethasmtp:3.1.7_1'
 
 }
 

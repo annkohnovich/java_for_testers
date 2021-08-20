@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.junit.JUnit4TestRunner;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,10 +14,10 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-    WebDriver wd;
+    private WebDriver wd;
     private final Properties properties;
-
     private String browser;
+    private FtpHelper ftp;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -26,21 +27,12 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-        if (browser.equals(BrowserType.FIREFOX)) {
-            wd = new FirefoxDriver();
-        } else if (browser.equals(BrowserType.CHROME)) {
-            wd = new ChromeDriver();
-        } else if (browser.equals(BrowserType.IE)) {
-            wd = new InternetExplorerDriver();
-        }
-
-
-        wd.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
-        wd.get(properties.getProperty("web.baseUrl"));
     }
 
     public void stop() {
-        wd.quit();
+        if (wd != null){
+            wd.quit();
+        }
     }
 
     public String getProperty(String key) {
@@ -49,6 +41,32 @@ public class ApplicationManager {
 
     public HttpSession newSession(){
         return new HttpSession(this);
+    }
+
+    public WebDriver getDriver(){
+        if (wd == null){
+            if (browser.equals(BrowserType.FIREFOX)) {
+                wd = new FirefoxDriver();
+            } else if (browser.equals(BrowserType.CHROME)) {
+                wd = new ChromeDriver();
+            } else if (browser.equals(BrowserType.IE)) {
+                wd = new InternetExplorerDriver();
+            }
+            wd.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+            wd.get(properties.getProperty("web.baseUrl"));
+        }
+        return wd;
+    }
+    
+    public FtpHelper ftp(){
+        if (ftp == null){
+            ftp = new FtpHelper(this);
+        }
+        return ftp;
+    }
+
+    public RegistrationHelper registration() {
+        return new RegistrationHelper(this);
     }
 }
 

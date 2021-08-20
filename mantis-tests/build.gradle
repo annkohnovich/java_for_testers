@@ -8,10 +8,8 @@ dependencies {
     implementation group: 'org.testng', name: 'testng', version: '7.4.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-4'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
-    //implementation 'org.apache.httpcomponents:httpcomponents-core:4.4.14'
-    //implementation 'org.wso2.orbit.org.apache.httpcomponents:httpclient:4.5.13.wso2v1'
-    //implementation 'io.sentry:sentry-apache-http-client-5:5.1.0'
     compile 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'commons-net:commons-net:20030805.205232'
 
 }
 

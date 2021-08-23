@@ -14,7 +14,6 @@ public class GroupData {
     @Id
     @Column (name = "group_id")
     private int id = Integer.MAX_VALUE;
-//    private int id;
     @Expose
     @Column (name = "group_name")
     private String name;

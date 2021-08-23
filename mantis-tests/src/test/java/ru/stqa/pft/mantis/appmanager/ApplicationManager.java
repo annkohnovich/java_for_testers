@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.junit.JUnit4TestRunner;
 
 import java.io.File;
 import java.io.FileReader;
@@ -19,6 +18,9 @@ public class ApplicationManager {
     private String browser;
     private FtpHelper ftp;
     private MailHelper mailHelper;
+    private LoginHelper loginHelper;
+    private AdminHelper adminHelper;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -26,6 +28,7 @@ public class ApplicationManager {
     }
 
     public void init() throws IOException {
+        dbHelper = new DbHelper();
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
     }
@@ -75,6 +78,24 @@ public class ApplicationManager {
             mailHelper = new MailHelper(this);
         }
         return mailHelper;
+    }
+
+    public LoginHelper login() {
+        if (loginHelper == null){
+            loginHelper = new LoginHelper(this);
+        }
+        return loginHelper;
+    }
+
+    public AdminHelper admin(){
+        if (adminHelper == null){
+            adminHelper = new AdminHelper(this);
+        }
+        return adminHelper;
+    }
+
+    public DbHelper db() {
+        return dbHelper;
     }
 }
 

@@ -8,11 +8,27 @@ public class AdminHelper extends HelperBase{
         super(app);
     }
 
-    public String resetPasswordAndReturnEmail(){
+    public void goToManageUsersPage(){
         click(By.linkText("Manage Users"));
+    }
+
+    public void selectUser(){
         click(By.partialLinkText("user"));
-        String email = wd.findElement(By.cssSelector("input#email-field")).getAttribute("value");
+    }
+
+    public String returnEmail(){
+        return wd.findElement(By.cssSelector("input#email-field")).getAttribute("value");
+    }
+
+    public void resetPassword(){
         click(By.cssSelector("input[value='Reset Password']"));
+    }
+
+    public String resetPasswordAndReturnEmail(){
+        goToManageUsersPage();
+        selectUser();
+        String email = returnEmail();
+        resetPassword();
         return email;
     }
 }

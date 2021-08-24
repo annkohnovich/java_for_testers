@@ -21,7 +21,7 @@ public class DbHelper {
         sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
     }
 
-    public UserData getUserNameWith(String email){
+    public UserData userWith(String email){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         UserData result = (UserData) session.createQuery(

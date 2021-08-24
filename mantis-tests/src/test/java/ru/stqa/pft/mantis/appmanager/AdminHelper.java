@@ -9,11 +9,10 @@ public class AdminHelper extends HelperBase{
     }
 
     public String resetPasswordAndReturnEmail(){
-        wd.findElement(By.linkText("Manage Users")).click();
-        wd.findElement(By.xpath("//*[contains(text(), 'reporter')]"));
-        wd.findElement(By.partialLinkText("user")).click();
+        click(By.linkText("Manage Users"));
+        click(By.partialLinkText("user"));
         String email = wd.findElement(By.cssSelector("input#email-field")).getAttribute("value");
-        wd.findElement(By.cssSelector("input[value='Reset Password']")).click();
+        click(By.cssSelector("input[value='Reset Password']"));
         return email;
     }
 }

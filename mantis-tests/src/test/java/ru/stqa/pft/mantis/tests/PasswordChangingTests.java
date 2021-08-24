@@ -1,14 +1,11 @@
 package ru.stqa.pft.mantis.tests;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
-import ru.stqa.pft.mantis.appmanager.HttpSession;
 import ru.stqa.pft.mantis.model.MailMessage;
-import ru.stqa.pft.mantis.model.UserData;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,18 +19,15 @@ public class PasswordChangingTests extends TestBase{
 
     @Test
     public void testPasswordChanging() throws IOException {
-        String adminUsername = "administrator";
-        String adminPassword = "password";
-        String userpassword = "new_password";
-        app.login().start(adminUsername, adminPassword);
+        String userPassword = "new_password";
+        app.login().start("administrator", "password");
         String email = app.admin().resetPasswordAndReturnEmail();
         List<MailMessage> mailMessage = app.mail().waitForMail(1, 10000);
         String link = findConfirmationLink(mailMessage, email);
-        app.registration().finish(link, userpassword);
+        app.registration().finish(link, userPassword);
+        String username = app.db().userWith(email).getUsername();
 
-        String username = app.db().getUserNameWith(email).getUsername();
-
-        Assert.assertTrue(app.newSession().login(username, userpassword));
+        Assert.assertTrue(app.newSession().login(username, userPassword));
     }
 
     private String findConfirmationLink(List<MailMessage> mailMessage, String email) {

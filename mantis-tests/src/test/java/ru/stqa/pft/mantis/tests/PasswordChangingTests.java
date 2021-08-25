@@ -17,6 +17,12 @@ public class PasswordChangingTests extends TestBase{
         app.mail().start();
     }
 
+//    public void ensurePreconditions(){
+//        if (app.db().users().stream().filter(user -> !user.getName().equals("administrator"))
+//        .collect(Collectors.toList()).size() == 0) {
+//        create user }
+//    }
+
     @Test
     public void testPasswordChanging() throws IOException {
         String userPassword = "new_password";

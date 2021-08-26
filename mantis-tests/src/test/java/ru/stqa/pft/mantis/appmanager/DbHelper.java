@@ -35,4 +35,13 @@ public class DbHelper {
         session.close();
         return result;
     }
+
+    public List <UserData> users() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List <UserData> list = session.createQuery("from UserData").list();
+        session.getTransaction().commit();
+        session.close();
+        return list;
+    }
 }

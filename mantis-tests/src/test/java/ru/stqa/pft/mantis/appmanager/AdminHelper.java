@@ -8,6 +8,10 @@ public class AdminHelper extends HelperBase{
         super(app);
     }
 
+    public void goToManagePage(){
+        click(By.xpath("//span[contains(text(), 'Manage')]"));
+    }
+
     public void goToManageUsersPage(){
         click(By.linkText("Manage Users"));
     }
@@ -25,6 +29,7 @@ public class AdminHelper extends HelperBase{
     }
 
     public String resetPasswordAndReturnEmail(){
+        goToManagePage();
         goToManageUsersPage();
         selectUser();
         String email = returnEmail();

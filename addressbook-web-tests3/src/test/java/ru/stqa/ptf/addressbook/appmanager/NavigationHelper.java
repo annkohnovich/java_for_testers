@@ -23,7 +23,8 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void returnToAllContactsList(){
+        homePage();
         Select element = new Select(wd.findElement(By.name("group")));
-        element.selectByValue("[all]");
+        element.selectByValue("[none]");
     }
 }

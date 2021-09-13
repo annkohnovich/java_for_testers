@@ -31,7 +31,6 @@ public class ContactDeletedFromGroupTest extends TestBase{
         app.contact().selectContactById(contact.getId());
         app.contact().submitDeletingGroup();
         app.goTo().homePageForGroup(groupToDelete.getName());
-        app.goTo().returnToAllContactsList();
 
         assertFalse(app.contact().isThereAContact(contact.getId()));
 
@@ -39,7 +38,7 @@ public class ContactDeletedFromGroupTest extends TestBase{
         Groups userGroupsAfter = updatedContactAfter.getGroups();
         assertEquals (userGroupsAfter.size(), userGroupsBefore.size() - 1);
         assertThat(userGroupsAfter, equalTo(userGroupsBefore.without(groupToDelete)));
-
+        app.goTo().returnToAllContactsList();
     }
 
     private ContactData updateContact (int index){

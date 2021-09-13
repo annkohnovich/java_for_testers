@@ -15,35 +15,35 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:6.0.0.Alpha9'
 }
 
-task testGroups (type: Test) {
-    useTestNG{
-        suites 'src/test/resources/testng-groups.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-    if (project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUI}"
-    }
-}
-
-task testContacts (type: Test) {
-    useTestNG{
-        suites 'src/test/resources/testng-contacts.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-    if (project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUI}"
-    }
-}
+//task testGroups (type: Test) {
+//    useTestNG{
+//        suites 'src/test/resources/testng-groups.xml'
+//    }
+//    if (project.hasProperty('browser')) {
+//        systemProperty 'browser', "${browser}"
+//    }
+//    if (project.hasProperty('target')) {
+//        systemProperty 'target', "${target}"
+//    }
+//    if (project.hasProperty('verifyUI')) {
+//        systemProperty 'verifyUI', "${verifyUI}"
+//    }
+//}
+//
+//task testContacts (type: Test) {
+//    useTestNG{
+//        suites 'src/test/resources/testng-contacts.xml'
+//    }
+//    if (project.hasProperty('browser')) {
+//        systemProperty 'browser', "${browser}"
+//    }
+//    if (project.hasProperty('target')) {
+//        systemProperty 'target', "${target}"
+//    }
+//    if (project.hasProperty('verifyUI')) {
+//        systemProperty 'verifyUI', "${verifyUI}"
+//    }
+//}
 
 test {
     useTestNG()

@@ -35,3 +35,4 @@ task testGroups (type: Test) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
+

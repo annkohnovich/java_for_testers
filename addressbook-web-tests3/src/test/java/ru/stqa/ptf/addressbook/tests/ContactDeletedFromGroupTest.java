@@ -1,6 +1,7 @@
 package ru.stqa.ptf.addressbook.tests;
 
-import org.testng.annotations.BeforeMethod;
+
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.GroupData;
@@ -30,6 +31,7 @@ public class ContactDeletedFromGroupTest extends TestBase{
         app.contact().selectContactById(contact.getId());
         app.contact().submitDeletingGroup();
         app.goTo().homePageForGroup(groupToDelete.getName());
+        app.goTo().returnToAllContactsList();
 
         assertFalse(app.contact().isThereAContact(contact.getId()));
 
@@ -64,4 +66,6 @@ public class ContactDeletedFromGroupTest extends TestBase{
             return contact.getGroups().iterator().next();
         }
     }
+
+
 }

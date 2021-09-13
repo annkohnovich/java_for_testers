@@ -50,6 +50,7 @@ public class ContactAddedToGroupTest extends TestBase{
         app.contact().selectGroupByIdToAdd(groupId);
         app.contact().submitAddingGroup();
         app.goTo().homePageForGroup(groupToAdd.getName());
+        app.goTo().returnToAllContactsList();
 
         assertTrue(app.contact().isThereAContact(id));
 

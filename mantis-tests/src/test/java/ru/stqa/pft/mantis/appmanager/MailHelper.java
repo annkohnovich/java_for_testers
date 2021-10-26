@@ -7,6 +7,7 @@ import ru.stqa.pft.mantis.model.MailMessage;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -23,7 +23,8 @@ import static org.hamcrest.MatcherAssert.*;
 public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
 
-    public static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+    public static final ApplicationManager app =
+            new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
     public void verifyGroupListInUI() {
         if (Boolean.getBoolean("verifyUI")) {

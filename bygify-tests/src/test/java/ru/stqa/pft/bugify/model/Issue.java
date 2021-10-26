@@ -1,5 +1,6 @@
 package ru.stqa.pft.bugify.model;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Issue {

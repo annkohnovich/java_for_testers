@@ -2,6 +2,7 @@ package ru.stqa.ptf.addressbook.tests;
 
 import com.google.gson.Gson;
 import org.openqa.selenium.json.TypeToken;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.ptf.addressbook.model.ContactData;
 import ru.stqa.ptf.addressbook.model.Contacts;

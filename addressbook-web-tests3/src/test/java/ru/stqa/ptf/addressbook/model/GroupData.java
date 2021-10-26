@@ -2,6 +2,7 @@ package ru.stqa.ptf.addressbook.model;
 
 import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
+import org.testng.Assert;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -90,4 +91,5 @@ public class GroupData {
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }

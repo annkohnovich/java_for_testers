@@ -33,8 +33,6 @@ public class TestBase {
         if (issueStatus.equals("closed")){
             return false;
         } else return true;
-
-         
     }
 
     public boolean isIssueExist(int issueId) throws Exception {

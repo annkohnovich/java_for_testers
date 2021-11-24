@@ -35,6 +35,7 @@ public class TestBase {
         } else return true;
     }
 
+
     
     public boolean isIssueExist(int issueId) throws Exception {
         Response response = RestAssured.get("https://bugify.stqa.ru/api/issues/" + issueId + ".json");
